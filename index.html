@@ -4,8 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Paper</title>
+    <script src="https://kit.fontawesome.com/f1ae1bf88e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="skin/css/style.css">
 </head>
 <body>
-    <h1>News Paper</h1>
+    <div id="disable-body" class="d-none"></div>
+    <header>
+        <h1>News Paper</h1>
+        <div class="actions">
+            <a id="login" class="user-form-link" href="login">login</a>
+            <a id="register" class="user-form-link" href="register">register</a>
+        </div>
+
+        <form action="login" class="user-form d-none">
+            <div class="form-title">
+                <h2>Login</h2>
+                <i class="fas fa-times close-form"></i>
+            </div>
+            <div class="form-input">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" name="email" placeholder="john.doe@gmail.com">
+            </div>
+            <div class="form-input">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" placeholder="password">
+            </div>
+            <button type="submit">login</button>
+        </form>
+
+        <form action="register" class="user-form d-none">
+            <div class="form-title">
+                <h2>Register</h2>
+                <i class="fas fa-times close-form"></i>
+            </div>
+            <div class="form-input">
+                <label for="register-email">Email</label>
+                <input type="email" id="register-email" name="email" placeholder="john.doe@gmail.com">
+            </div>
+            <div class="form-input">
+                <label for="register-pseudo">Retype tour password</label>
+                <input type="text" id="register-pseudo" name="pseudo" placeholder="John Doe">
+            </div>
+            <div class="form-input">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="password" placeholder="password">
+            </div>
+            <button type="submit">register</button>
+        </form>
+    </header>
+    <main></main>
+    <footer></footer>
+
+    <script src="js/app.js" type="module"></script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Anton|Baloo+Tammudu+2&display=swap');
+
+@import "./atoms/variables";
+@import "./atoms/forms";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo Tammudu 2';
+    line-height: 1;
+
+    h1,
+    h2,
+    h3 {
+        font-family: 'Anton';
+    }
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    padding: 2rem;
+}
+
+#disable-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .3);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .actions {
+        a:first-child {
+            margin-right: 1rem;
+        }
+    }
+}
+
+form {
+    label,
+    input {
+        line-height: 1;
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+.toast {
+    padding: .5rem 3rem;
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    box-shadow: $box_shadow;
+
+    &.toast-success {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    &.toast-error {
+        background: #f8d7da;
+        color: #721c24;
+    }
+}
