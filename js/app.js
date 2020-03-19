@@ -1,69 +1,60 @@
-import {FetchRequest} from './classes/FetchRequest.js';
+import {FetchRequest} from './classes/FetchRequest.js'
+import {UserForm} from './classes/UserForm.js';
+import {Toast} from './classes/Toast.js';
+import { Form } from './classes/Form.js';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // const api = 'https://newsapp.dwsapp.io/api/news/sources';
-    const api = 'https://api.dwsapp.io/api/';
+    const registerForm = new UserForm('.user-form[action="register"]');
+    const loginForm = new UserForm('.user-form[action="login"]');
+    const sourcesForm = new Form('#sources-form');
 
-    const userFormsLinks = document.querySelectorAll('a.user-form-link');
-    const userForms = document.querySelectorAll('.user-form');
-    const bodyDisabler = document.querySelector('#disable-body');
-
-
-
-    const hideForm = form => {
-        const formCloser = form.querySelector('.close-form');
-        formCloser.addEventListener('click', e => {
-            e.preventDefault();
-
-            form.classList.add('d-none');
-            bodyDisabler.classList.add('d-none');
-        });
-
-        bodyDisabler.addEventListener('click', () => {
-            form.classList.add('d-none');
-            bodyDisabler.classList.add('d-none');
-        })
-    };
-
-    const displayUserForms = e => {
+    sourcesForm.element.addEventListener('submit', e => {
         e.preventDefault();
+        
+        const selectedSource = e.target.options[e.target.selectedIndex].value;
+        console.log(selectedSource);
+    });
 
-        const formAction = e.target.getAttribute('href');
-        const form = document.querySelector(`form[action="${formAction}"]`);
-        form.classList.remove('d-none');
-        bodyDisabler.classList.remove('d-none');
-        hideForm(form);
-    };
+    const sourceSelect = document.querySelector('#source-list');
 
-    const getFormData = form => {
-        const inputs = form.querySelectorAll('input');
-        let data = {};
-        for (let input of inputs) {
-            data[input.getAttribute('name')] = input.value;
+    const api = 'https://newsapp.dwsapp.io/api/';
+
+    const getSources = async () => {
+        let sources = await new FetchRequest(`${api}news/sources/`).fetch();
+        if (sources.err === null) {
+            return sources.data.sources;
+        } else {
+            new Toast('error', sources.err).show();
         }
+    }
 
-        return data;
+    const createSourceOptions = sources => {
+        for (let source of sources) {
+            let option = document.createElement('option');
+            option.value = source.id;
+            option.innerText = source.name;
+            sourceSelect.appendChild(option);
+        }
+    }
+
+    const getOptions = async () => {
+        const sources = await getSources();
+        createSourceOptions(sources);
     };
 
-
-    const submitUserForm = async e => {
+    registerForm.element.addEventListener('submit', async e => {
         e.preventDefault();
-
-        const data = getFormData(e.target);
-        const action = e.target.getAttribute('action');
-        let response = await new FetchRequest(`${api}${action}`, 'POST', data).fetch();
+        const response = await registerForm.submit();
         console.log(response);
-    };
+    });
 
-
-
-    for (let link of userFormsLinks) {
-        link.addEventListener('click', displayUserForms);
-    }
-
-    for (let form of userForms) {
-        form.addEventListener('submit', submitUserForm);
-    }
+    loginForm.element.addEventListener('submit', async e => {
+        e.preventDefault();
+        const response = await loginForm.submit();
+        console.log(response);
+    });
+    
+    getOptions();
 
 });

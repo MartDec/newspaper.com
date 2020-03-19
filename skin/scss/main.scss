@@ -25,6 +25,8 @@ body {
 
 body {
     padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 #disable-body {
@@ -48,11 +50,8 @@ header {
     }
 }
 
-form {
-    label,
-    input {
-        line-height: 1;
-    }
+main {
+    margin-top: 2rem;
 }
 
 .d-none {

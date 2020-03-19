@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="skin/css/style.css">
 </head>
 <body>
-    <div id="disable-body" class="d-none"></div>
     <header>
         <h1>News Paper</h1>
         <div class="actions">
@@ -16,7 +15,7 @@
             <a id="register" class="user-form-link" href="register">register</a>
         </div>
 
-        <form action="login" class="user-form d-none">
+        <form action="login" method="POST" class="user-form d-none">
             <div class="form-title">
                 <h2>Login</h2>
                 <i class="fas fa-times close-form"></i>
@@ -32,7 +31,7 @@
             <button type="submit">login</button>
         </form>
 
-        <form action="register" class="user-form d-none">
+        <form action="register" method="POST" class="user-form d-none">
             <div class="form-title">
                 <h2>Register</h2>
                 <i class="fas fa-times close-form"></i>
@@ -42,8 +41,12 @@
                 <input type="email" id="register-email" name="email" placeholder="john.doe@gmail.com">
             </div>
             <div class="form-input">
-                <label for="register-pseudo">Retype tour password</label>
-                <input type="text" id="register-pseudo" name="pseudo" placeholder="John Doe">
+                <label for="register-firstname">Firstname</label>
+                <input type="text" id="register-firstname" name="firstname" placeholder="John">
+            </div>
+            <div class="form-input">
+                <label for="register-lastname">Lastname</label>
+                <input type="text" id="register-lastname" name="lastname" placeholder="Doe">
             </div>
             <div class="form-input">
                 <label for="register-password">Password</label>
@@ -52,7 +55,18 @@
             <button type="submit">register</button>
         </form>
     </header>
-    <main></main>
+    <main>
+        <section class="latest-articles">
+            <form action="select-source" id="sources-form">
+                <div class="form-input">
+                    <label for="source-list">Select your source</label>
+                    <select name="source-list" id="source-list"></select>
+                </div>
+                <button type="submit">choose</button>
+            </form>
+            <div class="articles-wrapper"></div>
+        </section>
+    </main>
     <footer></footer>
 
     <script src="js/app.js" type="module"></script>

@@ -1,4 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Anton|Baloo+Tammudu+2&display=swap");
+form label,
+form input {
+  line-height: 1;
+}
+form button {
+  padding: 0.3rem 1rem;
+}
+form .form-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
 form[action=login],
 form[action=register] {
   border-radius: 5px;
@@ -15,12 +28,6 @@ form[action=register] .form-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-}
-form[action=login] .form-input,
-form[action=register] .form-input {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 1rem;
 }
 form[action=login] button[type=submit],
@@ -50,6 +57,8 @@ body {
 
 body {
   padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 #disable-body {
@@ -70,9 +79,8 @@ header .actions a:first-child {
   margin-right: 1rem;
 }
 
-form label,
-form input {
-  line-height: 1;
+main {
+  margin-top: 2rem;
 }
 
 .d-none {

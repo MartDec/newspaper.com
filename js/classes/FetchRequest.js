@@ -11,15 +11,21 @@ export class FetchRequest {
     fetch() {
         let params = {
             method: this.method,
-            mode: 'cors'
+            redirect: 'follow',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'applications/json'
+            }
         };
 
         if (this.method !== 'GET' && this.data !== null)
-            params.body = this.data;
+            params.body = JSON.stringify(this.data);
 
-        let request = new Request(this.url, params);
-        return fetch(request)
-            .then(res => res.ok ? res.json() : {error: `${res.status}: ${res.statusText}`})
+        return fetch(this.url, params)
+            .then(res => {
+                console.log(res);
+                return res.ok ? res.json() : {error: `${res.status}: ${res.statusText}`}
+            })
             .then(data => {
                 if (typeof data.error === 'undefined')
                     return data;
