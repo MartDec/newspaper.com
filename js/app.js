@@ -18,12 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const sourceSelect = document.querySelector('#source-list');
 
-    const api = 'https://newsapp.dwsapp.io/api/';
+    const api = 'https://newsapp.dwsapp.io/api';
 
     const getSources = async () => {
         let sources = await new FetchRequest(
-            `${api}news/sources/`,
-            'POST'
+            `${api}/news/sources/`,
+            'POST',
+            { "news_api_token": "e0eebbf274184bc8b57cc4e736c566eb" }
         ).fetch();
 
         if (sources.err === null) {

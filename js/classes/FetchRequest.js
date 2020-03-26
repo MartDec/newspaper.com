@@ -27,9 +27,13 @@ export class FetchRequest {
             params.body = JSON.stringify(this.data);
 
 
+        console.log(this.url);
         console.log(params);
         return fetch(this.url, params)
-            .then(res => res.ok ? res.json() : {error: `${res.status}: ${res.statusText}`})
+            .then(res => {
+                console.log('RES', res);
+                return res.ok ? res.json() : {error: `${res.status}: ${res.statusText}`}
+            })
             .then(data => {
                 if (typeof data.error === 'undefined')
                     return data;
