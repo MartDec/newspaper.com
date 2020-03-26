@@ -2,10 +2,11 @@ import { Toast } from './Toast.js';
 
 export class FetchRequest {
 
-    constructor(url, method = 'GET', data = null) {
+    constructor(url, method = 'GET', data = null, headers = null) {
         this.url = url;
         this.method = method;
         this.data = data;
+        this.headers = headers;
     };
 
     fetch() {
@@ -18,9 +19,15 @@ export class FetchRequest {
             }
         };
 
+        if (this.headers !== null) {
+            params.headers = {...params.headers, ...this.headers};
+        }
+
         if (this.method !== 'GET' && this.data !== null)
             params.body = JSON.stringify(this.data);
 
+
+        console.log(params);
         return fetch(this.url, params)
             .then(res => res.ok ? res.json() : {error: `${res.status}: ${res.statusText}`})
             .then(data => {

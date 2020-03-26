@@ -21,7 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const api = 'https://newsapp.dwsapp.io/api/';
 
     const getSources = async () => {
-        let sources = await new FetchRequest(`${api}news/sources/`).fetch();
+        let sources = await new FetchRequest(
+            `${api}news/sources/`,
+            'POST'
+        ).fetch();
+
         if (sources.err === null) {
             return sources.data.sources;
         } else {
